@@ -149,22 +149,6 @@ The true medical model is trained privately using real hospital data that cannot
 Thanks to the medical staff who enabled access to anonymized real data for academic use.
 All sensitive information has been handled responsibly and never shared publicly.
 
-
----
-
-# ✅ **Answer to your other question**
-
-### **“Should I use `/data/kidneyTRUE.xlsx` or `kidneyTRUE.xlsx`?”**
-
-Use this **ONLY if** you create a folder named `data` inside your GitHub repo:
-
-/data/kidney_synthetic.xlsx
-
-
-
-Then your code should be:
-
-```python
 path_true = "data/kidneyTRUE.xlsx"
 
 
