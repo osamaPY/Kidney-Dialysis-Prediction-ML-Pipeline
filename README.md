@@ -1,38 +1,71 @@
-# Dialysis Prediction from Laboratory Tests
+# Kidney Dialysis Prediction ML Pipeline
 
-## Overview
-This project builds a machine learning pipeline to predict if a patient requires dialysis based on laboratory tests and demographic data. The goal was to process raw hospital data and compare different classification models.
+Machine learning pipeline for predicting whether a patient may require dialysis from laboratory and demographic records.
 
-## Data Privacy and Synthetic Data
-The original dataset used for this project comes from a hospital in Iran and contains private medical records. Due to privacy concerns, **the real data is not included in this repository.**
+The original work used private hospital data, so this public repository uses a synthetic dataset with the same general structure. The goal is to show the pipeline design, preprocessing, and evaluation approach without exposing patient data.
 
-To demonstrate that the code works, I have included a **synthetic dataset** (`kidney_synthetic.xlsx`). I generated this data to mimic the structure and column names of the original files.
+## Why this project matters
 
-**Note:** Because the synthetic data is randomly generated, it does not reflect real medical correlations. Therefore, the accuracy and evaluation metrics in the notebook will be low. The actual model trained on the real private data performed significantly better.
+Medical datasets are rarely clean notebook examples. The useful work is in turning raw clinical records into a model-ready table while staying careful about privacy, missing values, class imbalance, and evaluation.
 
-## Repository Files
-* `finalproject.ipynb`: The main notebook containing data cleaning, preprocessing, and modeling.
-* `SyntheticDataGEN.ipynb`: The script used to generate the synthetic dataset.
-* `kidney_synthetic.xlsx`: Safe dummy data for testing the code.
-* `requirements.txt`: List of Python libraries required.
+This project focuses on that workflow:
 
-## Pipeline Steps
-1. **Data Cleaning:** Translating column names from Persian to English and handling missing values (dropping columns with >99% missing data).
-2. **Preprocessing:** Pivoting data so each row represents one patient and encoding the target variable.
-3. **Imbalance Handling:** Using oversampling techniques to address the class imbalance between dialysis and non-dialysis patients.
-4. **Modeling:** Training Logistic Regression, Random Forest, and SVM models.
-5. **Evaluation:** Comparing models using Accuracy, Precision, Recall, F1-score, and ROC curves.
+- translating and standardizing raw feature names
+- removing columns with almost no usable signal
+- reshaping lab records into patient-level rows
+- encoding the dialysis target
+- handling class imbalance
+- comparing multiple classifiers with more than one metric
 
-## How to Run
-1. Install the required libraries:
-   ```bash
-   pip install -r requirements.txt
+## Data
 
-2. Open the main notebook:
-   jupyter notebook finalproject.ipynb
+The real dataset is not included because it contains private medical records.
 
-(Optional) To generate new synthetic data, run SyntheticDataGEN.ipynb.
+Included instead:
 
+- `kidney_synthetic.xlsx`: safe synthetic data for running the notebook
+- `SyntheticDataGEN.ipynb`: notebook used to generate the synthetic file
 
-Disclaimer
-This project is for educational purposes. The synthetic data should not be used to draw medical conclusions.
+Important limitation: the synthetic data is only for code demonstration. It should not be used for medical conclusions, and its metrics should not be interpreted as clinical performance.
+
+## Pipeline
+
+1. Clean raw columns and remove unusable fields.
+2. Transform lab-test rows into patient-level features.
+3. Encode the target label.
+4. Handle missing values and imbalanced classes.
+5. Train Logistic Regression, Random Forest, and SVM models.
+6. Compare accuracy, precision, recall, F1-score, and ROC behavior.
+
+## Repository structure
+
+| file | purpose |
+| --- | --- |
+| `finalproject.ipynb` | main pipeline notebook |
+| `SyntheticDataGEN.ipynb` | synthetic data generation |
+| `kidney_synthetic.xlsx` | safe demo dataset |
+| `requirements.txt` | Python dependencies |
+
+## Run it
+
+```bash
+pip install -r requirements.txt
+jupyter notebook finalproject.ipynb
+```
+
+To regenerate the synthetic data, run:
+
+```bash
+jupyter notebook SyntheticDataGEN.ipynb
+```
+
+## What I learned
+
+- how to document an ML project when the real dataset cannot be shared
+- why privacy constraints affect portfolio design
+- how imbalance changes model evaluation
+- why preprocessing decisions matter as much as the classifier
+
+## Disclaimer
+
+This is an educational portfolio project. It is not a medical product and should not be used for diagnosis or treatment decisions.
